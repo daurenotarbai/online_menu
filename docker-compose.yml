@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.8'
 
 services: 
   db:
@@ -8,17 +8,16 @@ services:
     environment: 
       POSTGRES_PASSWORD: 123456
       POSTGRES_USER: postgres
-      POSTGRES_DB : postgres
-  django:
+      POSTGRES_DB : menu_app_db
+  web:
     container_name: menu_app_web
     build:
       context: ./
       dockerfile: Dockerfile
-    command: bash -c "python /usr/src/online_menu/manage.py migrate --noinput &&
-             python /usr/src/online_menu/manage.py runserver 0.0.0.0:8000"
+    command: bash -c "python /usr/src/menu_app/manage.py migrate --noinput &&
+             python /usr/src/menu_app/manage.py runserver 0.0.0.0:8000"
     volumes: 
-      - .:/usr/src/online_menu
-
+      - .:/usr/src/menu_app
     ports: 
       - 8000:8000
 
