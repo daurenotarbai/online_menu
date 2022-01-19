@@ -1,0 +1,27 @@
+version: '3.8'
+
+services: 
+  db:
+    image: postgres:12
+    volumes: 
+      - pg_data:/var/lib/postgresql/data/
+    environment: 
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_USER: postgres
+      POSTGRES_DB : menu_app_db
+  web:
+    container_name: menu_app_web
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    command: bash -c "python /usr/src/menu_app/manage.py migrate --noinput &&
+             python /usr/src/menu_app/manage.py runserver 0.0.0.0:8000"
+    volumes: 
+      - .:/usr/src/menu_app
+    ports: 
+      - 8000:8000
+
+    depends_on: 
+      - db
+volumes: 
+  pg_data:
