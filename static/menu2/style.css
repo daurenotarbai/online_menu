@@ -30,12 +30,21 @@
 #RESPONSIVE DESIGN
 */
 /* BASE - Base tyles, Variables, Mixins, etc. */
+/*body {*/
+/*  background-color: #ffffff;*/
+/*  font-family: "Prata", serif;*/
+/*  color: #333333;*/
+/*  font-size: 15px;*/
+/*  overflow-x: hidden;*/
+/*}*/
 body {
-  background-color: #ffffff;
-  font-family: "Prata", serif;
-  color: #333333;
-  font-size: 15px;
-  overflow-x: hidden;
+	font-size: 15px;
+    line-height: 1.52;
+    color: #717f86;
+    font-size: 16px;
+	font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
 }
 
 .no-padding {
@@ -285,6 +294,7 @@ img {
   float: left;
   width: 100%;
   position: relative;
+  padding-bottom: 20px;
 }
 #mu-slider .mu-slider-area {
   display: inline;
@@ -302,6 +312,35 @@ img {
   position: relative;
   width: 100%;
 }
+.category-img-block{
+  display: inline;
+  float: left;
+  position: relative;
+  width: 100%;
+}
+.category-img-block:after{
+  background-color: rgba(0, 0, 0, 0.6);
+  bottom: 0;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.category-img-block img{
+  width: 100%;
+}
+.category-img-block-content{
+  position: absolute;
+  left: 15%;
+  top: 33%;
+  right: 15%;
+  text-align: center;
+  z-index: 99;
+  color: white;
+
+
+}
 #mu-slider .mu-slider-area .mu-top-slider .mu-top-slider-single:after {
   background-color: rgba(0, 0, 0, 0.6);
   bottom: 0;
@@ -312,9 +351,14 @@ img {
   top: 0;
   z-index: 9;
 }
+
+
 #mu-slider .mu-slider-area .mu-top-slider .mu-top-slider-single img {
   width: 100%;
+
 }
+
+
 #mu-slider .mu-slider-area .mu-top-slider .mu-top-slider-single .mu-top-slider-content {
   position: absolute;
   left: 15%;
@@ -435,8 +479,8 @@ img {
   text-align: center;
 }
 .mu-title .mu-subtitle {
-  font-size: 30px;
-  font-family: "Tangerine", cursive;
+  font-size: 44px;
+  font-family: "Gabriola", cursive;
   line-height: 30px;
 }
 .mu-subtitle{
@@ -690,6 +734,7 @@ RESERVATION SECTION
 }
 #mu-reservation .mu-reservation-area .mu-reservation-content .mu-reservation-form .form-control {
   margin-bottom: 20px;
+
 }
 #mu-reservation .mu-reservation-area .mu-reservation-content .mu-reservation-form input[type="text"],
 #mu-reservation .mu-reservation-area .mu-reservation-content .mu-reservation-form input[type="email"] {
@@ -2020,14 +2065,16 @@ RESERVATION SECTION
   }
 
   .mu-main-navbar .navbar-header .navbar-brand {
-    height: 30px;
-    width: 115px;
+    height: 40px;
+    width: 125px;
+    margin-left: 15px;
   }
 
   .mu-main-navbar .navbar-header .navbar-brand-small {
-    height: 25px;
+    height: 35px;
     margin-top: 13px;
-    width: 110px;
+    margin-left: 15px;
+    width: 120px;
   }
 
   .mu-abtus-slider .slick-slide img {
@@ -2432,12 +2479,46 @@ RESERVATION SECTION
   }
 }
 
+/*ADDING BY ME*/
+.product-description{
+  height: 70px !important;
+}
+.actions{
+  position: absolute;
+  right: 10px;
+}
+.action{
+  font-size: 12px;
+}
+.action2{
+  font-size: 18px;
+  padding-left: 20px;
+}
+
+.product-warning{
+    width: 85%;
+    height: 25px;
+    font-family: "Open Sans", sans-serif;
+    color: #ffffff;
+    text-align: center;
+    background-color: #df1717;
+    margin-top: 25px;
+}
+
+.btn-adding-category{
+  height: 43px;
+
+}
+
+.btn-category-actions{
+  text-align: left;
+}
+/*ADDING BY ME*/
+
+
+
 
 /*LOGIN POPUP START*/
-/*.container {*/
-/*  padding: 2rem 0rem;*/
-/*}*/
-
 @media (min-width: 576px) {
   .modal-dialog {
     max-width: 400px;
@@ -2466,16 +2547,12 @@ RESERVATION SECTION
 .signup-section{
   text-align: center;
 }
-
-
 .delimiter {
   padding: 1rem;
 }
-
 .social-buttons .btn {
   margin: 0 0.5rem 1rem;
 }
-
 .signup-section {
   padding: 0.3rem 0rem;
 }
@@ -2483,7 +2560,181 @@ RESERVATION SECTION
   margin-top: 20%;
   font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif !important;
 }
-.product-description{
-  height: 70px !important;
-}
 /*LOGIN POPUP END*/
+
+
+
+/*DROPDOWN FOR PRODUCT MENU*/
+.dropbtn {
+  padding: 16px;
+  font-size: 14px !important;
+  cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  color: grey;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 130px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  margin-left: -80px;
+  font-size: 13px !important;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+.form-control {
+  height: 45px;
+}
+/*DROPDOWN FOR PRODUCT MENU*/
+
+
+/*FOR UPDATING CATEGORY INFO POPUP*/
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+/*FOR UPDATING CATEGORY POPUP*/
+
+
+
+
+/*FOR MENU3.HTML*/
+.menu-restaurant{
+    width: 50%;
+    float: left;
+    padding: 15px;
+    position: relative;
+}
+.menu-restaurant .menu-title {
+    float: left;
+    font-family: Montserrat,arial;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #305B89;
+    font-weight: bold;
+}
+.menu-restaurant .menu-title-danger {
+    color: red !important;
+}
+.menu-restaurant .menu-line {
+    position: absolute;
+    bottom: 6px;
+    border-bottom: 1px dotted rgba(0,0,0,.3);
+    margin-left: .6rem;
+    margin-right: .6rem;
+}
+.menu-restaurant .menu-price {
+    font-weight: 600;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.menu-restaurant .menu-subtitle {
+    display: block;
+    float: left;
+    color: #B1B1B1;
+    /*font-family: "Gabriola", cursive;*/
+    font-size: 1.2rem;
+}
+
+
+.header-h {
+    font-size: 46px;
+    font-family: 'Satisfy', sans-serif;
+    font-weight: 300;
+}
+.header-p {
+    color: #9699a6;
+    font-size: 16px;
+}
+.menu-restaurant span.clearfix {
+    position: relative;
+    display: block;
+}
+.section-padding{
+    padding: 60px 0px;
+}
+
+.marb-35{
+    margin-bottom: 35px;
+}
+
+@media (min-width: 20px) and (max-width: 450px) {
+  .menu-restaurant {
+    width: 100%;
+  }
+
+  .details-text {
+    border: 0px;
+    border-bottom: 2px solid #A87F41;
+  }
+
+  .header-h {
+    font-size: 35px;
+  }
+
+  .header-p, body {
+    font-size: 14px;
+  }
+}
+
+#menu-flters ul li a.active, #menu-flters ul li a:hover {
+    background: #305B89;
+    color: #fff;
+    border: 1px solid #252645;
+}
+#menu-flters ul li {
+    display: inline-block;
+    color: #fff;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    margin-bottom: 40px;
+}
+#menu-flters ul li a {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #565656;
+    border-radius: 0px;
+    border: 1px solid #BBBBBB;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+
+
+
+

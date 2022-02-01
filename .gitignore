@@ -5,5 +5,5 @@ migrations/
 media/
 .env.dev
 .env.prod
-media/
+config/test.py
 

@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import authenticate
 
+from menu_app.models import Product, Category
 
 
 class UserLoginForm(forms.Form):
@@ -23,9 +24,23 @@ class UserLoginForm(forms.Form):
 
 
 
-class UserLoginForm(forms.Form):
-  product_name = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control","placeholder":"Product name"}))
-  price = forms.CharField(widget=forms.NumberInput(attrs={"class":"form-control","placeholder":"Price"}))
-  description = forms.CharField(widget=forms.Textarea(attrs={"class":"form-control product-description","placeholder":"Description"}))
-  img = forms.FileField(widget=forms.FileInput())
+class ProductForm(forms.ModelForm):
+  category = forms.IntegerField(widget=forms.NumberInput(attrs={"type":"hidden","id":"category_input"}))
+  class Meta:
+    model = Product
+    fields = ['name','price','description','img','category']
+    widgets = {
+      'name': forms.TextInput(attrs={"class":"form-control","placeholder":"Product name"}),
+      'price': forms.NumberInput(attrs={"class":"form-control","placeholder":"Price"}),
+      'description': forms.Textarea(attrs={"class":"form-control product-description","placeholder":"Description"})
+    }
 
+class CategoryForm(forms.ModelForm):
+  restaurant = forms.IntegerField(widget=forms.NumberInput(attrs={"type":"hidden","id":"restaurant_input"}))
+  class Meta:
+    model = Category
+    fields = ['name','place_order','img','restaurant']
+    widgets = {
+      'name': forms.TextInput(attrs={"class":"form-control","placeholder":"Category name"}),
+      'place_order': forms.NumberInput(attrs={"class":"form-control","placeholder":"Place Order"}),
+    }

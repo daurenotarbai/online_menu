@@ -1,0 +1,483 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Default title{% endblock title %}</title>
+
+    <!-- Favicon -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Satisfy|Bree+Serif|Candal|PT+Sans">
+
+    <!-- Font awesome -->
+    <link href="{% static 'menu2/assets/css/font-awesome.min.css' %}" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="{% static 'menu2/assets/css/bootstrap.css' %}" rel="stylesheet">
+    <!-- Slick slider -->
+    <link rel="stylesheet" type="text/css" href="{% static 'menu2/assets/css/slick.css' %}">
+    <!-- Date Picker -->
+    <link rel="stylesheet" type="text/css" href="{% static 'menu2/assets/css/bootstrap-datepicker.css' %}">
+    <!-- Fancybox slider -->
+    <link rel="stylesheet" href="{% static 'menu2/assets/css/jquery.fancybox.css' %}" type="text/css" media="screen" />
+    <!-- Theme color -->
+    <link id="switcher" href="{% static 'menu2/assets/css/theme-color/default-theme.css' %}" rel="stylesheet">
+    <!-- Main style sheet -->
+    <link href="{% static 'menu2/style.css' %}" rel="stylesheet">
+
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.3.1/css/all.css'>
+
+  </head>
+  <body>
+  <!-- Pre Loader -->
+  <div id="aa-preloader-area">
+    <div class="mu-preloader">
+      <img src="{% static 'menu2/assets/img/preloader.gif' %}" alt=" loader img">
+    </div>
+  </div>
+  <!--START SCROLL TOP BUTTON -->
+    <a class="scrollToTop" href="#">
+      <i class="fa fa-angle-up"></i>
+      <span style="font-size: 9px">Kategori</span>
+    </a>
+  <!-- END SCROLL TOP BUTTON -->
+
+   <!-- Start header section -->
+  <header id="mu-header">
+    <nav class="navbar navbar-default mu-main-navbar" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <!-- FOR MOBILE VIEW COLLAPSED BUTTON -->
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <!-- LOGO -->
+          <a class="navbar-brand" href="#"><img src="{{ restaurant.logo.url }}" alt="Logo img"></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul id="top-menu" class="nav navbar-nav navbar-right mu-main-nav">
+            {%if user.is_authenticated%}
+              <li><a href="#mu-slider">{{user.username}}</a></li>
+              <li><a href="{%url 'logout_user'%}">Log out</a></li>
+            {% else %}
+              <li><a data-toggle="modal" class="btn" type="button" data-target="#loginModal">Login</a></li>
+            {%endif%}
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+  </header>
+  <!-- End header section -->
+
+
+  <!-- Start slider  -->
+  <section id="mu-slider">
+    <div class="mu-slider-area">
+      <!-- Top slider -->
+      <div class="mu-top-slider">
+        <!-- Top slider single slide -->
+        <div class="mu-top-slider-single">
+          <img src="{% static 'menu2/assets/img/slider/3.jpg' %}" alt="img">
+          <!-- Top slider content -->
+          <div class="mu-top-slider-content">
+            <span class="mu-slider-small-title">Welcome</span>
+            <h2 class="mu-slider-title">TO THE {{ restaurant.name }}</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque voluptatem accusamus non quidem, deleniti optio.</p>
+            <a href="#" class="mu-readmore-btn">MENÜ</a>
+          </div>
+          <!-- / Top slider content -->
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- End slider  -->
+
+
+
+
+<div>
+    {% block content%}
+
+    {% endblock content %}
+</div>
+
+
+
+<!--  LOGIN POPUP START-->
+<div class="modal fade" id="loginModal"  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-title text-center">
+          <h4>Login</h4>
+        </div>
+        <div class="d-flex flex-column text-center">
+          <form method="POST" action="{% url 'restaurant_login' %}">
+            {% csrf_token %}
+            {% for field in form_login %}
+                <div class="form-group">
+                  {{ field }}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-info btn-block btn-round">Login</button>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <div class="signup-section">Did you forget password<a href="#a" class="text-info"> reset</a>.</div>
+      </div>
+    </div>
+  </div>
+</div>
+{#  LOGIN POPUP END#}
+
+
+<!--  ADDING CATEGORY POPUP START-->
+<div class="modal fade" id="AddingCategoryModal_{{ restaurant.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-title text-center">
+          <h4>New Category</h4>
+        </div>
+        <div class="d-flex flex-column text-center">
+          <form method="POST" enctype="multipart/form-data" action="{% url 'create_category' %}">
+            {% csrf_token %}
+            {% for field in form_category %}
+                <div class="form-group">
+                {% if field.name != "restaurant" %}
+                    {{ field }}
+                {% else %}
+                    <input type="hidden" name="restaurant"  value="{{ restaurant.id }}">
+                {% endif %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn btn-info btn-block btn-round">Create</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{#  ADDING CATEGORY POPUP END#}
+
+
+<!--  CATEGORY POPUP START-->
+<div class="modal fade" id="CategoryModal_{{ restaurant.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-title text-center">
+          <h4>Categories</h4>
+        </div>
+        <div class="d-flex flex-column text-center">
+          <table>
+              <tr>
+                <th>Name</th>
+                <th>Place order</th>
+                <th></th>
+              </tr>
+              {% for category in restaurant.category.all %}
+              <tr>
+                <td>{{ category.name }}</td>
+                <td>{{ category.place_order }}</td>
+                <td>
+                    <a data-toggle="modal" data-target="#UpdatingCategoryModal_{{category.id}}"><i class="fa fa-pencil-square-o action2" aria-hidden="true" ></i></a>
+                    <a data-toggle="modal" data-target="#DeletingCategoryModal_{{category.id}}"><i class="fa fa-trash action2"  aria-hidden="true"></i></a>
+                </td>
+              </tr>
+              {% endfor %}
+
+
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{#  CATEGORY POPUP END#}
+
+
+<!--  UPDATING CATEGORY POPUP START-->
+{% for category in restaurant.category.all %}
+<div class="modal fade" id="UpdatingCategoryModal_{{ category.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-title text-center">
+          <h4>Update Category '{{ category.name }}'</h4>
+        </div>
+        <div class="d-flex flex-column text-center">
+          <form method="POST" enctype="multipart/form-data" action="{% url 'update_category' category.id %}">
+            {% csrf_token %}
+                <div class="form-group">
+                    <input class="form-control" type="text" name="name"  value="{{ category.name }}">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="number" name="place_order"  value="{{ category.place_order }}">
+                </div>
+
+                <div class="form-group">
+                    <input class="form-control" type="file" value="dfd"  name="img" accept="image/*">
+                </div>
+              {% if category.img %}
+              <img width="100%"  src="{{ category.img.url }}" style="padding-bottom: 10px" alt="">
+
+              {% endif %}
+            <button type="submit" class="btn btn-info btn-block btn-round">Update</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+{#  UPDATING CATEGORY POPUP END#}
+
+
+<!--  DELETING CATEGORY POPUP START-->
+{% for category in restaurant.category.all %}
+<div class="modal fade" id="DeletingCategoryModal_{{ category.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-title text-center">
+          <h4>Are you sure to delete '{{ category.name }}' </h4>
+        </div>
+        <div class="d-flex flex-column text-center">
+          <form method="POST" action="{% url 'delete_category' category.id %}">
+            {% csrf_token %}
+
+              <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-secondary">Cancel</button>
+              <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+{#  DELETING CATEGORY POPUP END#}
+
+
+<!--  ADDING PRODUCT POPUP START-->
+{% for category in restaurant.category.all %}
+<div class="modal fade" id="AddingProductModal_{{ category.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-title text-center">
+          <h4>New Product</h4>
+        </div>
+        <div class="d-flex flex-column text-center">
+          <form method="POST" enctype="multipart/form-data" action="{% url 'create_product' %}">
+            {% csrf_token %}
+            {% for field in form_product %}
+                <div class="form-group">
+                {% if field.name != "category" %}
+                    {{ field }}
+                {% else %}
+                    <input type="hidden" name="category"  value="{{ category.id }}">
+                {% endif %}
+                </div>
+            {% endfor %}
+              <div class="modal-footer d-flex justify-content-center">
+                <div class="signup-section">only 'jpg' format</div>
+              </div>
+            <button type="submit" class="btn btn-info btn-block btn-round">Create</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+{#  ADDING PRODUCT POPUP END#}
+
+
+<!--  UPDATING PRODUCT POPUP START-->
+{% for category in restaurant.category.all %}
+{% for product in category.product.all %}
+<div class="modal fade" id="UpdatingProductModal_{{ product.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-title text-center">
+          <h4>Update Product</h4>
+        </div>
+        <div class="d-flex flex-column text-center">
+          <form method="POST" enctype="multipart/form-data" action="{% url 'update_product' product.id %}">
+            {% csrf_token %}
+                <div class="form-group">
+                    <input class="form-control" type="text" name="name"  value="{{ product.name }}">
+                </div>
+                <div class="form-group">
+                    <input value="{{ product.price | floatformat  }}" class="form-control" type="number" step="0.5" min="0" name="price" placeholder="Price">
+                </div>
+                <div class="form-group" >
+                     <textarea class="form-control" placeholder="Description"  name="description" id="">{{ product.description }}</textarea>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="file" value="dfd"  name="img" accept="image/*">
+                </div>
+              {% if product.img %}
+              <img width="150px" height="150px" src="{{ product.img.url }}" alt="">
+              {% endif %}
+
+              <div class="modal-footer d-flex justify-content-center">
+                <div class="signup-section">only 'jpg' format</div>
+              </div>
+            <button type="submit" class="btn btn-info btn-block btn-round">Update</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% endfor %}
+{#  UPDATING PRODUCT POPUP END#}
+
+
+<!--  DELETING PRODUCT POPUP START-->
+{% for category in restaurant.category.all %}
+{% for product in category.product.all %}
+<div class="modal fade" id="DeletingProductModal_{{ product.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-title text-center">
+          <h4>Are you sure to delete '{{ product.name }}' </h4>
+        </div>
+        <div class="d-flex flex-column text-center">
+          <form method="POST" action="{% url 'delete_product' product.id %}">
+            {% csrf_token %}
+
+              <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-secondary">Cancel</button>
+              <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% endfor %}
+{#  DELETING PRODUCT POPUP END#}
+
+
+  <!-- Start Footer -->
+  <footer id="mu-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+
+        <div class="mu-footer-area">
+           <div class="mu-footer-social">
+            <a href="https://instagram.com/bybrotherskultur?utm_medium=copy_link"><i class="fab fa-instagram"></i></a>
+{#            <a href="https://wa.me/905071257146"><i class="fab fa-whatsapp"></i></a>#}
+          </div>
+          <div class="mu-footer-copyright">
+            <p>Created by <a rel="nofollow" href="http://onmenu.site/">onmenu.site</a></p>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </footer>
+  <!-- End Footer -->
+
+  <script>
+    /* When the user clicks on the button,
+    toggle between hiding and showing the dropdown content */
+    function myFunction(thiss) {
+      console.log(thiss)
+      var element = thiss.closest(".dropdown").querySelector('.myDropdown')
+          element.classList.toggle('show');
+
+  }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+  </script>
+
+
+  <script src="{% static 'menu2/assets/js/jquery.min.js' %}"></script>
+
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="{% static 'menu2/assets/js/bootstrap.js' %}"></script>
+  <!-- Slick slider -->
+  <script type="text/javascript" src="{% static 'menu2/assets/js/slick.js' %}"></script>
+  <!-- Counter -->
+  <script type="text/javascript" src="{% static 'menu2/assets/js/waypoints.js' %}"></script>
+  <script type="text/javascript" src="{% static 'menu2/assets/js/jquery.counterup.js' %}"></script>
+  <!-- Date Picker -->
+  <script type="text/javascript" src="{% static 'menu2/assets/js/bootstrap-datepicker.js' %}"></script>
+  <!-- Mixit slider -->
+  <script type="text/javascript" src="{% static 'menu2/assets/js/jquery.mixitup.js' %}"></script>
+  <!-- Add fancyBox -->
+  <script type="text/javascript" src="{% static 'menu2/assets/js/jquery.fancybox.pack.js' %}"></script>
+
+  <!-- Custom js -->
+  <script src="{% static 'menu2/assets/js/custom.js' %}"></script>
+  {% if restaurant.slug != "bybrothers" %}
+  <script src="{% static 'menu2/assets/js/category-filter.js' %}"></script>
+  {% endif %}
+  </body>
+</html>

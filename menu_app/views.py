@@ -1,12 +1,16 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
+# from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from django.shortcuts import get_object_or_404, redirect, render
-from menu_app.forms import UserLoginForm
+from menu_app.forms import UserLoginForm, ProductForm, CategoryForm
 from menu_app.models import Product, Category, Restaurant
 
+
+class MainView(TemplateView):
+  template_name = "main.html"
 
 class MenuView(DetailView):
   model = Restaurant
@@ -14,10 +18,13 @@ class MenuView(DetailView):
   context_object_name = "restaurant"
 
   def get_context_data(self, **kwargs):
+    if kwargs.get('object').slug=='bybrothers':
+      self.template_name='menu/menu4.html'
+
     context = super(MenuView, self).get_context_data(**kwargs)
-    context['categories'] = Category.objects.filter(is_active=True)
-    context['Restaurant'] = get_object_or_404(Restaurant,pk=1)
-    context['form'] = UserLoginForm(self.request.POST or None)
+    context['form_login'] = UserLoginForm(self.request.POST or None)
+    context['form_product'] = ProductForm(self.request.POST or None)
+    context['form_category'] = CategoryForm(self.request.POST or None)
     return context
 
 @csrf_exempt
@@ -37,7 +44,62 @@ def login_view(request):
   return render(request, "404.html")
 
 
-
 def logout_view(request):
   logout(request)
   return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+
+class ProductCreateView(CreateView):
+  model = Product
+  fields = ['name','price','category','img','description']
+
+  def get_success_url(self):
+    return self.request.META.get('HTTP_REFERER')
+
+
+class ProductUpdateView(UpdateView):
+  model = Product
+  fields = ['name','price','img','description']
+
+  def get_success_url(self):
+    return self.request.META.get('HTTP_REFERER')
+
+
+class ProductDeleteView(DeleteView):
+  model = Product
+
+  def get_success_url(self):
+    return self.request.META.get('HTTP_REFERER')
+
+
+def update_product_status(request,pk):
+  product = Product.objects.get(pk=pk)
+  if product.is_active:
+      product.is_active = False
+  else:
+      product.is_active = True
+  product.save()
+  return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+
+class CategoryCreateView(CreateView):
+  model = Category
+  fields = ['name','place_order','img','restaurant']
+
+  def get_success_url(self):
+    return self.request.META.get('HTTP_REFERER')
+
+
+class CategoryUpdateView(UpdateView):
+  model = Category
+  fields = ['name','img','place_order']
+
+  def get_success_url(self):
+    return self.request.META.get('HTTP_REFERER')
+
+
+class CategoryDeleteView(DeleteView):
+  model = Category
+
+  def get_success_url(self):
+    return self.request.META.get('HTTP_REFERER')
