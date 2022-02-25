@@ -2157,7 +2157,8 @@ p {
 
 @media (max-width: 768px) {
   .section {
-    padding: 60px 0;
+    /*padding: 60px 0;*/
+    padding: 1px 0;
   }
   .title-heading .heading {
     font-size: 35px !important;
@@ -2170,6 +2171,9 @@ p {
   }
   .mt-60 {
     margin-top: 60px;
+  }
+  .tab-pane .row .col-md-6 img {
+    width: 70%;
   }
 }
 
@@ -3561,6 +3565,9 @@ p {
   }
   .social-feature-right:after {
     left: 60px;
+  }
+  .container .container .justify-content-center {
+    margin-bottom: -30px;
   }
 }
 
