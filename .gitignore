@@ -3,7 +3,7 @@ venv/
 __pycache__/
 migrations/
 media/
-.env.dev
-.env.prod
+.env
 config/local_settings.py
+config/prod_settings.py
 
