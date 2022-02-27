@@ -211,7 +211,7 @@ img {
   transition: all 0.5s;
 }
 .mu-main-navbar .navbar-header .navbar-brand img {
-  width: 100%;
+  /*width: 100%;*/
   height: 100%;
 }
 .mu-main-navbar .navbar-header .navbar-brand-small {
