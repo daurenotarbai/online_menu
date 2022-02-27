@@ -17,8 +17,10 @@ class MenuView(DetailView):
     context_object_name = "restaurant"
 
     def get_context_data(self, **kwargs):
-        if kwargs.get('object').slug in ['bybrothers', 'almahanym']:
+        if kwargs.get('object').slug == 'bybrothers':
             self.template_name = 'menu/menu4.html'
+        if kwargs.get('object').slug == 'almahanym':
+            self.template_name = 'menu/menu5.html'
 
         context = super(MenuView, self).get_context_data(**kwargs)
         context['form_login'] = UserLoginForm(self.request.POST or None)
