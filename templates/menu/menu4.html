@@ -93,7 +93,7 @@
               </div>
               {% endif %}
             <span class="clearfix">
-              <a class=" menu-title {% if product.is_active == False %} menu-title-danger {% endif %}" data-toggle="modal" type="button" data-target="#product_detail_{{product.id}}">{{ product.name }}</a>
+              <a class="btn menu-title {% if product.is_active == False %} menu-title-danger {% endif %}" data-toggle="modal" type="button" data-target="#product_detail_{{product.id}}">{{ product.name }}</a>
               <span style="left: 166px; right: 44px;" class="menu-line"></span>
               <span class="menu-price">{{ product.price|floatformat }}TL</span>
             </span>
