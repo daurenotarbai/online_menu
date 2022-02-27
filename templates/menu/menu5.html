@@ -9,6 +9,7 @@
 
 .menu-restaurant .menu-title {
 color: #FFB03B;
+text-decoration: underline;
 }
 .menu-list .container .marb-35 .row .header-h{
     color: #FFB03B !important;
@@ -101,8 +102,8 @@ color: #FFB03B;
               {% endif %}
             <span class="clearfix">
               <a class="btn menu-title {% if product.is_active == False %} menu-title-danger {% endif %}" data-toggle="modal" type="button" data-target="#product_detail_{{product.id}}">{{ product.name }}</a>
-              <span style="left: 166px; right: 44px;" class="menu-line"></span>
-              <span class="menu-price">{{ product.price|floatformat }}TL</span>
+              <span style="left: 166px; right: 44px;" class="menu-line {% if product.is_active == False %} menu-title-danger {% endif %}"></span>
+              <span class="menu-price {% if product.is_active == False %} menu-title-danger {% endif %}">{{ product.price|floatformat }}TL</span>
             </span>
             {% if product.description %}<span class="menu-subtitle">{{ product.description }}</span> {% endif %}
           </div>
