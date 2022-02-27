@@ -76,8 +76,8 @@
               </div>
 
           </div>
-
           <!-- End slider  -->
+
           {% for product in category.product.all %}
           <div class="{{ category.name | str_replace }} menu-restaurant">
             {% if user.is_authenticated %}
@@ -93,7 +93,7 @@
               </div>
               {% endif %}
             <span class="clearfix">
-              <a class="menu-title {% if product.is_active == False %} menu-title-danger {% endif %} " href="#" data-meal-img="{% static 'menu2/assets/img/slider/3.jpg' %}">{{ product.name }}</a>
+              <a class=" menu-title {% if product.is_active == False %} menu-title-danger {% endif %}" data-toggle="modal" type="button" data-target="#product_detail_{{product.id}}">{{ product.name }}</a>
               <span style="left: 166px; right: 44px;" class="menu-line"></span>
               <span class="menu-price">{{ product.price|floatformat }}TL</span>
             </span>

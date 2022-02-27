@@ -108,7 +108,7 @@
 
 
 <!--  LOGIN POPUP START-->
-<div class="modal fade" id="loginModal"  aria-hidden="true">
+<div class="modal fade popup_modal" id="loginModal"  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
@@ -142,7 +142,7 @@
 
 
 <!--  ADDING CATEGORY POPUP START-->
-<div class="modal fade" id="AddingCategoryModal_{{ restaurant.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade popup_modal" id="AddingCategoryModal_{{ restaurant.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
@@ -178,7 +178,7 @@
 
 
 <!--  CATEGORY POPUP START-->
-<div class="modal fade" id="CategoryModal_{{ restaurant.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade popup_modal" id="CategoryModal_{{ restaurant.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
@@ -220,7 +220,7 @@
 
 <!--  UPDATING CATEGORY POPUP START-->
 {% for category in restaurant.category.all %}
-<div class="modal fade" id="UpdatingCategoryModal_{{ category.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade popup_modal" id="UpdatingCategoryModal_{{ category.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
@@ -262,7 +262,7 @@
 
 <!--  DELETING CATEGORY POPUP START-->
 {% for category in restaurant.category.all %}
-<div class="modal fade" id="DeletingCategoryModal_{{ category.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade popup_modal" id="DeletingCategoryModal_{{ category.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
@@ -292,7 +292,7 @@
 
 <!--  ADDING PRODUCT POPUP START-->
 {% for category in restaurant.category.all %}
-<div class="modal fade" id="AddingProductModal_{{ category.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade popup_modal" id="AddingProductModal_{{ category.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
@@ -333,7 +333,7 @@
 <!--  UPDATING PRODUCT POPUP START-->
 {% for category in restaurant.category.all %}
 {% for product in category.product.all %}
-<div class="modal fade" id="UpdatingProductModal_{{ product.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade popup_modal" id="UpdatingProductModal_{{ product.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
@@ -382,7 +382,7 @@
 <!--  DELETING PRODUCT POPUP START-->
 {% for category in restaurant.category.all %}
 {% for product in category.product.all %}
-<div class="modal fade" id="DeletingProductModal_{{ product.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade popup_modal" id="DeletingProductModal_{{ product.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header border-bottom-0">
@@ -411,6 +411,33 @@
 {#  DELETING PRODUCT POPUP END#}
 
 
+  <!--  Product photo POPUP START-->
+{% for category in restaurant.category.all %}
+{% for product in category.product.all %}
+<div class="modal fade popup_modal" id="product_detail_{{ product.id }}" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-title text-center">
+          <h4>{{ product.name }}</h4>
+        </div>
+        <div class="d-flex flex-column text-center popup_product_img">
+            <img  style="width: 100%" alt="" src="{{ product.img.url }}">
+{#            <img  style="width: 100%" id="popup_product_img_id" src="" alt="">#}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% endfor %}
+{#  Product photo POPUP END#}
+
   <!-- Start Footer -->
   <footer id="mu-footer">
     <div class="container">
@@ -433,6 +460,7 @@
   <!-- End Footer -->
 
   <script>
+
     /* When the user clicks on the button,
     toggle between hiding and showing the dropdown content */
     function myFunction(thiss) {
@@ -455,6 +483,10 @@
         }
       }
     }
+
+
+
+
   </script>
 
 

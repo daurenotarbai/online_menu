@@ -2526,6 +2526,9 @@ RESERVATION SECTION
   .modal-dialog .modal-content {
     padding: 1rem;
   }
+  .popup_modal {
+  margin-top: 5% !important;
+}
 }
 .modal-header .close {
   margin-top: -1.5rem;
@@ -2557,8 +2560,11 @@ RESERVATION SECTION
   padding: 0.3rem 0rem;
 }
 #loginModal {
-  margin-top: 20%;
   font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif !important;
+}
+
+.popup_modal {
+  margin-top: 30%;
 }
 /*LOGIN POPUP END*/
 
